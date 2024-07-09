@@ -24,23 +24,23 @@ func main() {
 	people["Дмитрий Васильев"] = Man{Name: "Дмитрий", LastName: "Васильев", Age: 33, Gender: "Мужской", Crimes: 1}
 	people["Ирина Попова"] = Man{Name: "Ирина", LastName: "Попова", Age: 29, Gender: "Женский", Crimes: 0}
 
-	fmt.Println("Список людей:")
-	fmt.Println("<---------------------------------------------------------------->")
-	for key, value := range people {
-		fmt.Printf("%s - %d лет, пол: %s, нарушений: %d\n", key, value.Age, value.Gender, value.Crimes)
-	}
+	suspects := []string{"Иван Петров", "Вера Воронова", "Пётр Иванов", "Наталья Соколова", "Сергей Кузнецов", "Светлана Семёнова", "Андрей Смирнов", "Анастасия Сидорова", "Дмитрий Васильев", "Ирина Попова"}
 
-	fmt.Println("<---------------------------------------------------------------->")
+	fmt.Println("\nПодозреваемый, у которого наибольшее количество совершённых преступлений:")
+	fmt.Println("-------------------------------------------------------------------------")
+	maxCrimes := 0
+	var suspect string
 
-	suspects := []string{"Иван Петров", "Анастасия Сидорова", "Дмитрий Васильев", "Вера Воронова"}
-
-	fmt.Println("\nЛюди, подозреваемые в нарушение закона:")
 	for _, name := range suspects {
-		fmt.Println("<---------------------------------------------------------------->")
 		if person, exists := people[name]; exists {
-			fmt.Printf("%s - %d лет, пол: %s, нарушений: %d\n", name, person.Age, person.Gender, person.Crimes)
+			if person.Crimes > maxCrimes {
+				maxCrimes = person.Crimes
+				suspect = name
+			}
 		} else {
-			fmt.Printf("Персона %s не найдена в списке\n", name)
+			fmt.Println("В базе данных нет информации по запрошенным подозреваемым.")
 		}
 	}
+	fmt.Printf("%s - нарушений: %d\n", suspect, maxCrimes)
+	fmt.Println("-------------------------------------------------------------------------")
 }
