@@ -31,14 +31,18 @@ func main() {
 	maxCrimes := 0
 	var suspect string
 
+	if len(people) == 0 {
+		fmt.Println("В базе данных нет информации по запрошенным подозреваемым.")
+	}
+
+	fmt.Println("-------------------------------------------------------------------------")
+
 	for _, name := range suspects {
 		if person, exists := people[name]; exists {
 			if person.Crimes > maxCrimes {
 				maxCrimes = person.Crimes
 				suspect = name
 			}
-		} else {
-			fmt.Println("В базе данных нет информации по запрошенным подозреваемым.")
 		}
 	}
 	fmt.Printf("%s - преступлений: %d\n", suspect, maxCrimes)
